@@ -1,0 +1,6 @@
+This is a minimal setup to showcase cookies being leaked between Jest tests when using MSW:
+
+- In a first test, an authenticated call is made, and a cookie is set in the response (through MSW's `res.ctx(cookie(name, value))` API).
+- In a second test, the same call is made but without authentication (we attempt to clear the cookie first) => we unexpectedly do not get a 401.
+
+If you run the second test alone through `it.only`, the test passes.
